@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 by MinterTeam
+ * Copyright (C) by MinterTeam. 2018
  * @link https://github.com/MinterTeam
  *
  * The MIT License
@@ -23,19 +23,57 @@
  * THE SOFTWARE.
  */
 
+buildscript {
+    repositories {
+        mavenLocal()
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.0-beta02'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
+    }
+}
+
+allprojects {
+    repositories {
+        mavenLocal()
+        google()
+        jcenter()
+        maven { url "https://dl.bintray.com/ethereum/maven/" }
+        maven { url 'https://clojars.org/repo/' }
+        maven { url 'https://jitpack.io' }
+        maven { url "https://maven.edwardstock.com/artifactory/libs-release-local" }
+        maven { url "https://repo1.maven.org/maven2/com/google/zxing/" }
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    }
+}
+
+ext {
+    minterMinSdk = 19
+    minterMaxSdk = 27
+    minterBuildTools = "28.0.0"
+    minterLibSupport = "27.1.1"
+    minterSdkVers = "1.0.0"
+    pomDescription = "Android Minter Core SDK"
+}
+
 apply plugin: 'com.android.library'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+group = 'network.minter.android'
+version = '1.0.0'
 
 android {
-    compileSdkVersion 27
-
-
+    compileSdkVersion minterMaxSdk
+    buildToolsVersion minterBuildTools
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 27
+        minSdkVersion minterMinSdk
+        targetSdkVersion minterMaxSdk
         versionCode 1
-        versionName "1.0"
-
+        versionName version
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
@@ -79,7 +117,9 @@ android {
 }
 
 dependencies {
-    api project(':mintercore')
+//    api project(':mintercore')
+    netTestImplementation "network.minter.android:minter-android-core-testnet:${minterSdkVers}"
+    netMainImplementation "network.minter.android:minter-android-core:${minterSdkVers}"
 
     // network
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
@@ -89,8 +129,6 @@ dependencies {
 
     // stuff
     implementation 'com.jakewharton.timber:timber:4.5.1'
-    api 'org.parceler:parceler-api:1.1.10'
+    implementation 'org.parceler:parceler-api:1.1.10'
     annotationProcessor 'org.parceler:parceler:1.1.10'
-
-    implementation "com.android.support:appcompat-v7:${minterLibSupport}"
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 by MinterTeam
+ * Copyright (C) by MinterTeam. 2018
  * @link https://github.com/MinterTeam
  *
  * The MIT License
@@ -25,6 +25,8 @@
 
 package network.minter.my.models;
 
+import org.parceler.Parcel;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,10 +36,11 @@ import network.minter.mintercore.crypto.HashUtil;
 import static network.minter.mintercore.internal.common.Preconditions.checkNotNull;
 
 /**
- * MinterWallet. 2018
+ * minter-android-myminter. 2018
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
+@Parcel
 public class PasswordChangeRequest {
 
     public String newPassword;
@@ -65,7 +68,7 @@ public class PasswordChangeRequest {
         }
     }
 
-
+    @Parcel
     public static final class EncryptedData {
         public String id;
         public EncryptedString encrypted;

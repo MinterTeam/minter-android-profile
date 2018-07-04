@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 by MinterTeam
+ * Copyright (C) by MinterTeam. 2018
  * @link https://github.com/MinterTeam
  *
  * The MIT License
@@ -53,7 +53,7 @@ import static network.minter.mintercore.internal.common.Preconditions.checkArgum
 import static network.minter.mintercore.internal.common.Preconditions.checkNotNull;
 
 /**
- * MinterWallet. 2018
+ * minter-android-myminter. 2018
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
@@ -88,6 +88,15 @@ public class MyMinterApi {
         checkNotNull(coinName, "Coin name can't be null");
         checkArgument(coinName.length() >= 3 && coinName.length() <= 10, "Coin length must be from 3 to 10 chars");
         return BASE_API_URL + "/api/v1/avatar/by/coin/" + coinName.toUpperCase();
+    }
+
+    public static String getUserAvatarUrl(long id) {
+        return getUserAvatarUrl(String.valueOf(id));
+    }
+
+    public static String getUserAvatarUrl(String id) {
+        checkNotNull(id, "Id required");
+        return BASE_API_URL + "/api/v1/avatar/by/user/" + id;
     }
 
     public static MyMinterApi getInstance() {

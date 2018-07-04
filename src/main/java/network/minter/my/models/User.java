@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 by MinterTeam
+ * Copyright (C) by MinterTeam. 2018
  * @link https://github.com/MinterTeam
  *
  * The MIT License
@@ -31,15 +31,19 @@ import org.parceler.Parcel;
 
 import java.util.Locale;
 
+import network.minter.my.MyMinterApi;
+
 /**
- * MinterWallet. 2018
+ * minter-android-myminter. 2018
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
 @Parcel
 public class User {
 
-    User() {}
+    public Token token;
+    @SerializedName("user") public Data data;
+
     public User(String authToken) {
         token = new Token();
         token.tokenType = "advanced";
@@ -49,12 +53,12 @@ public class User {
 
         data = new Data();
     }
-    public Token token;
-    @SerializedName("user")
-    public Data data;
+
+    User() {
+    }
 
     public Data getData() {
-        if(data == null) {
+        if (data == null) {
             data = new Data();
         }
 
@@ -85,7 +89,7 @@ public class User {
         }
 
         public String getLanguage() {
-            if(language == null) {
+            if (language == null) {
                 language = "en_US";
             }
             return language;
@@ -117,11 +121,11 @@ public class User {
 
         public String getUrl() {
             if (id < 0) {
-                return "https://my.beta.minter.network/api/v1/avatar/by/user/1";
+                return MyMinterApi.getUserAvatarUrl(1);
             }
 
-            if (src == null) {
-                return String.format("https://my.beta.minter.network/api/v1/avatar/by/user/%d", id);
+            if (src == null && id > 0) {
+                return MyMinterApi.getUserAvatarUrl(id);
             }
 
             return src;

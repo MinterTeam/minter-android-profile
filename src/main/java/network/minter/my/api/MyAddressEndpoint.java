@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 by MinterTeam
+ * Copyright (C) by MinterTeam. 2018
  * @link https://github.com/MinterTeam
  *
  * The MIT License
@@ -39,7 +39,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
- * MinterWallet. Май 2018
+ * minter-android-myminter. Май 2018
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
@@ -111,10 +111,4 @@ public interface MyAddressEndpoint {
      */
     @DELETE("/api/v1/addresses/{id}")
     Call<MyResult<Object>> deleteAddress(@Path("id") String addressId);
-
-
-
-
-
-
 }
