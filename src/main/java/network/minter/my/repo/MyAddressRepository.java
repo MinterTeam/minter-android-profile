@@ -41,25 +41,25 @@ import retrofit2.Call;
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
-public class MyAddressRepository extends DataRepository<MyAddressEndpoint> {
+public class MyAddressRepository extends DataRepository<MyAddressEndpoint> implements DataRepository.Configurator {
     public MyAddressRepository(@NonNull ApiService.Builder apiBuilder) {
         super(apiBuilder);
     }
 
     public Call<MyResult<List<MyAddressData>>> getAddresses() {
-        return getService().getAddresses();
+        return getInstantService(this).getAddresses();
     }
 
     public Call<MyResult<List<MyAddressData>>> getAddresses(int page) {
-        return getService().getAddresses(page);
+        return getInstantService(this).getAddresses(page);
     }
 
     public Call<MyResult<List<MyAddressData>>> getAddressesWithEncrypted() {
-        return getService().getAddressesWithEncrypted();
+        return getInstantService(this).getAddressesWithEncrypted();
     }
 
     public Call<MyResult<Object>> delete(String addressId) {
-        return getService().deleteAddress(addressId);
+        return getInstantService(this).deleteAddress(addressId);
     }
 
     public Call<MyResult<Object>> delete(MyAddressData address) {
@@ -67,22 +67,21 @@ public class MyAddressRepository extends DataRepository<MyAddressEndpoint> {
     }
 
     public Call<MyResult<Object>> addAddress(MyAddressData data) {
-        return getService().addAddress(data);
+        return getInstantService(this).addAddress(data);
     }
 
     public Call<MyResult<Object>> updateAddress(MyAddressData addressData) {
-        return getService().updateAddress(addressData.id, addressData);
+        return getInstantService(this).updateAddress(addressData.id, addressData);
     }
 
     public Call<MyResult<Object>> setAddressMain(boolean isMain, MyAddressData data) {
         data.isMain = isMain;
-        return getService().updateAddress(data.id, data);
+        return getInstantService(this).updateAddress(data.id, data);
     }
 
-
     @Override
-    protected boolean isAuthRequired() {
-        return true;
+    public void configure(ApiService.Builder api) {
+        api.authRequired(true);
     }
 
     @NonNull

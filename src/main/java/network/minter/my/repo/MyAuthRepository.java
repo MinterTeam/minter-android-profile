@@ -43,9 +43,14 @@ import retrofit2.Call;
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
-public class MyAuthRepository extends DataRepository<MyAuthEndpoint> {
+public class MyAuthRepository extends DataRepository<MyAuthEndpoint> implements DataRepository.Configurator {
     public MyAuthRepository(@NonNull ApiService.Builder apiBuilder) {
         super(apiBuilder);
+    }
+
+    @Override
+    public void configure(ApiService.Builder api) {
+        api.authRequired(true);
     }
 
     @NonNull
@@ -59,10 +64,10 @@ public class MyAuthRepository extends DataRepository<MyAuthEndpoint> {
     }
 
     public Call<MyResult<ProfileRequestResult>> register(RegisterData registerData) {
-        return getService().register(registerData);
+        return getInstantService(this).register(registerData);
     }
 
     public Call<MyResult<UsernameData>> checkUsernameAvailability(String username) {
-        return getService().checkUsernameAvailability(username);
+        return getInstantService(this).checkUsernameAvailability(username);
     }
 }

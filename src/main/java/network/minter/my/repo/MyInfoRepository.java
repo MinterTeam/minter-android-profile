@@ -54,7 +54,7 @@ public class MyInfoRepository extends DataRepository<MyInfoEndpoint> {
     }
 
     public Call<MyResult<AddressInfoResult>> getAddressWithUserInfo(String address) {
-        return getService().getAddressWithUserInfo(address);
+        return getInstantService().getAddressWithUserInfo(address);
     }
 
     public Call<MyResult<AddressInfoResult>> getAddressWithUserInfo(MinterAddress address) {
@@ -62,7 +62,7 @@ public class MyInfoRepository extends DataRepository<MyInfoEndpoint> {
     }
 
     public Call<MyResult<List<AddressInfoResult>>> getAddressesWithUserInfoByStrings(List<String> addresses) {
-        return getService().getAddressesWithUserInfo(addresses);
+        return getInstantService().getAddressesWithUserInfo(addresses);
     }
 
     public Call<MyResult<List<AddressInfoResult>>> getAddressesWithUserInfo(List<MinterAddress> addresses) {
@@ -75,7 +75,7 @@ public class MyInfoRepository extends DataRepository<MyInfoEndpoint> {
     }
 
     public Call<MyResult<User.Data>> getUserInfoByUsername(String username) {
-        return getService().getUserInfoByUsername(username);
+        return getInstantService().getUserInfoByUsername(username);
     }
 
     public Call<MyResult<User.Data>> getUserInfoByUser(User user) {
@@ -102,16 +102,11 @@ public class MyInfoRepository extends DataRepository<MyInfoEndpoint> {
             return getAddressWithUserInfo(input);
         } else if (input.substring(0, 1).equals("@")) {
             // searching data by username
-            return getService().findAddressByUsername(input.substring(1));
+            return getInstantService().findAddressByUsername(input.substring(1));
         } else {
             // searching by email
-            return getService().findAddressByEmail(input);
+            return getInstantService().findAddressByEmail(input);
         }
-    }
-
-    @Override
-    protected boolean isAuthRequired() {
-        return true;
     }
 
     @NonNull
