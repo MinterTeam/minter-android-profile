@@ -56,7 +56,7 @@ public interface MyInfoEndpoint {
      * @return
      */
     @GET("/api/v1/info/by/addresses")
-    Call<MyResult<List<AddressInfoResult>>> getAddressesWithUserInfo(@Query("addresses[]") List<String> addresses);
+    Call<MyResult<List<AddressInfoResult>>> getAddressesWithUserInfo(@Query(value = "addresses[]", encoded = true) List<String> addresses);
 
     /**
      * Get user information by his username
