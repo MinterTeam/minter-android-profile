@@ -30,6 +30,7 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import network.minter.mintercore.MinterSDK;
 import network.minter.mintercore.crypto.MinterAddress;
 import network.minter.mintercore.internal.api.ApiService;
 import network.minter.mintercore.internal.data.DataRepository;
@@ -88,16 +89,22 @@ public class MyInfoRepository extends DataRepository<MyInfoEndpoint> {
     /**
      * Find address by indistinct recipient value: username or email address
      *
-     * @param input Can be username with prefix '@' or email address
+     * @param input Can be address with prefix 'Mx', username with prefix '@' or email address
      * @return
      */
-    public Call<MyResult<AddressInfoResult>> findAddressByInput(@NonNull String input) {
+    public Call<MyResult<AddressInfoResult>> findAddressInfoByInput(@NonNull String input) {
         checkNotNull(input, "Input can't be null");
         checkArgument(!input.isEmpty(), "Input can't be empty string");
         checkArgument(input.length() >= 2, "Input length must have length more than 2 characters");
-        if (input.substring(0, 1).equals("@")) {
+
+        if (input.substring(0, 2).equals(MinterSDK.PREFIX_ADDRESS) && input.length() == 42) {
+            // searching data by address
+            return getAddressWithUserInfo(input);
+        } else if (input.substring(0, 1).equals("@")) {
+            // searching data by username
             return getService().findAddressByUsername(input.substring(1));
         } else {
+            // searching by email
             return getService().findAddressByEmail(input);
         }
     }
