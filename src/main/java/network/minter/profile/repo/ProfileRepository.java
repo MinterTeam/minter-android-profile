@@ -23,7 +23,7 @@
  * THE SOFTWARE.
  */
 
-package network.minter.my.repo;
+package network.minter.profile.repo;
 
 import android.support.annotation.NonNull;
 
@@ -32,44 +32,44 @@ import java.util.Map;
 import network.minter.mintercore.internal.api.ApiService;
 import network.minter.mintercore.internal.data.DataRepository;
 import network.minter.mintercore.internal.helpers.CollectionsHelper;
-import network.minter.my.api.MyProfileEndpoint;
-import network.minter.my.models.MyResult;
-import network.minter.my.models.PasswordChangeRequest;
-import network.minter.my.models.ProfileRequestResult;
-import network.minter.my.models.User;
+import network.minter.profile.api.ProfileEndpoint;
+import network.minter.profile.models.PasswordChangeRequest;
+import network.minter.profile.models.ProfileRequestResult;
+import network.minter.profile.models.ProfileResult;
+import network.minter.profile.models.User;
 import retrofit2.Call;
 
 import static network.minter.mintercore.internal.common.Preconditions.checkNotNull;
 
 /**
- * minter-android-myminter. 2018
+ * minter-android-profile. 2018
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
-public class MyProfileRepository extends DataRepository<MyProfileEndpoint> implements DataRepository.Configurator {
-    public MyProfileRepository(@NonNull ApiService.Builder apiBuilder) {
+public class ProfileRepository extends DataRepository<ProfileEndpoint> implements DataRepository.Configurator {
+	public ProfileRepository(@NonNull ApiService.Builder apiBuilder) {
         super(apiBuilder);
     }
 
-    public Call<MyResult<User.Data>> getProfile() {
+	public Call<ProfileResult<User.Data>> getProfile() {
         return getService().getProfile();
     }
 
-    public Call<MyResult<ProfileRequestResult>> updateProfile(@NonNull User.Data data) {
+	public Call<ProfileResult<ProfileRequestResult>> updateProfile(@NonNull User.Data data) {
         checkNotNull(data);
         return getInstantService(this).updateProfile(data);
     }
 
-    public Call<MyResult<ProfileRequestResult>> updateField(String field, String value) {
+	public Call<ProfileResult<ProfileRequestResult>> updateField(String field, String value) {
         Map<String, String> data = CollectionsHelper.asMap(field, value);
         return getInstantService(this).updateProfile(data);
     }
 
-    public Call<MyResult<User.Avatar>> updateAvatar(String b64) {
+	public Call<ProfileResult<User.Avatar>> updateAvatar(String b64) {
         return getInstantService(this).updateAvatarBase64(b64);
     }
 
-    public Call<MyResult<Object>> changePassword(PasswordChangeRequest data) {
+	public Call<ProfileResult<Object>> changePassword(PasswordChangeRequest data) {
         return getInstantService(this).changePassword(data);
     }
 
@@ -80,8 +80,8 @@ public class MyProfileRepository extends DataRepository<MyProfileEndpoint> imple
 
     @NonNull
     @Override
-    protected Class<MyProfileEndpoint> getServiceClass() {
-        return MyProfileEndpoint.class;
+    protected Class<ProfileEndpoint> getServiceClass() {
+	    return ProfileEndpoint.class;
     }
 
     @Override

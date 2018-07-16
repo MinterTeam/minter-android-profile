@@ -23,19 +23,56 @@
  * THE SOFTWARE.
  */
 
-package network.minter.my.models;
+package network.minter.profile.models;
 
 import org.parceler.Parcel;
 
-import network.minter.mintercore.crypto.MinterAddress;
+import java.util.ArrayList;
+import java.util.List;
+
+import network.minter.mintercore.crypto.EncryptedString;
+import network.minter.mintercore.crypto.HashUtil;
+
+import static network.minter.mintercore.internal.common.Preconditions.checkNotNull;
 
 /**
- * minter-android-myminter. 2018
+ * minter-android-profile. 2018
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
 @Parcel
-public class AddressInfoResult {
-    public MinterAddress address;
-    public User.Data user;
+public class PasswordChangeRequest {
+
+    public String newPassword;
+    public List<EncryptedData> addressesEncryptedData;
+
+    public void setRawPassword(String password) {
+        checkNotNull(password);
+        newPassword = HashUtil.sha256HexDouble(password);
+    }
+
+	public void addEncrypted(ProfileAddressData data) {
+        if (addressesEncryptedData == null) {
+            addressesEncryptedData = new ArrayList<>();
+        }
+
+        final EncryptedData d = new EncryptedData();
+        d.id = data.id;
+        d.encrypted = data.encrypted;
+        addressesEncryptedData.add(d);
+    }
+
+	public void addEncrypted(List<ProfileAddressData> items) {
+		for (ProfileAddressData d : items) {
+            addEncrypted(d);
+        }
+    }
+
+    @Parcel
+    public static final class EncryptedData {
+        public String id;
+        public EncryptedString encrypted;
+    }
+
+
 }

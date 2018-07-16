@@ -23,14 +23,14 @@
  * THE SOFTWARE.
  */
 
-package network.minter.my.models;
+package network.minter.profile.models;
 
 import org.parceler.Parcel;
 
 import network.minter.mintercore.crypto.HashUtil;
 
 /**
- * minter-android-myminter. 2018
+ * minter-android-profile. 2018
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
@@ -43,7 +43,7 @@ public class RegisterData {
     public String language;
     public String password;
     public transient String rawPassword;
-    public MyAddressData mainAddress;
+	public ProfileAddressData mainAddress;
 
     public RegisterData preparePassword() {
         password = HashUtil.sha256HexDouble(rawPassword);

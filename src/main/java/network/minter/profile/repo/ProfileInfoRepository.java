@@ -23,7 +23,7 @@
  * THE SOFTWARE.
  */
 
-package network.minter.my.repo;
+package network.minter.profile.repo;
 
 import android.support.annotation.NonNull;
 
@@ -34,38 +34,38 @@ import network.minter.mintercore.MinterSDK;
 import network.minter.mintercore.crypto.MinterAddress;
 import network.minter.mintercore.internal.api.ApiService;
 import network.minter.mintercore.internal.data.DataRepository;
-import network.minter.my.api.MyInfoEndpoint;
-import network.minter.my.models.AddressInfoResult;
-import network.minter.my.models.MyResult;
-import network.minter.my.models.User;
+import network.minter.profile.api.ProfileInfoEndpoint;
+import network.minter.profile.models.AddressInfoResult;
+import network.minter.profile.models.ProfileResult;
+import network.minter.profile.models.User;
 import retrofit2.Call;
 
 import static network.minter.mintercore.internal.common.Preconditions.checkArgument;
 import static network.minter.mintercore.internal.common.Preconditions.checkNotNull;
 
 /**
- * minter-android-myminter. 2018
+ * minter-android-profile. 2018
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
-public class MyInfoRepository extends DataRepository<MyInfoEndpoint> {
-    public MyInfoRepository(@NonNull ApiService.Builder apiBuilder) {
+public class ProfileInfoRepository extends DataRepository<ProfileInfoEndpoint> {
+	public ProfileInfoRepository(@NonNull ApiService.Builder apiBuilder) {
         super(apiBuilder);
     }
 
-    public Call<MyResult<AddressInfoResult>> getAddressWithUserInfo(String address) {
+	public Call<ProfileResult<AddressInfoResult>> getAddressWithUserInfo(String address) {
         return getInstantService().getAddressWithUserInfo(address);
     }
 
-    public Call<MyResult<AddressInfoResult>> getAddressWithUserInfo(MinterAddress address) {
+	public Call<ProfileResult<AddressInfoResult>> getAddressWithUserInfo(MinterAddress address) {
         return getAddressWithUserInfo(address.toString());
     }
 
-    public Call<MyResult<List<AddressInfoResult>>> getAddressesWithUserInfoByStrings(List<String> addresses) {
+	public Call<ProfileResult<List<AddressInfoResult>>> getAddressesWithUserInfoByStrings(List<String> addresses) {
         return getInstantService().getAddressesWithUserInfo(addresses);
     }
 
-    public Call<MyResult<List<AddressInfoResult>>> getAddressesWithUserInfo(List<MinterAddress> addresses) {
+	public Call<ProfileResult<List<AddressInfoResult>>> getAddressesWithUserInfo(List<MinterAddress> addresses) {
         final List<String> out = new ArrayList<>(addresses.size());
         for (MinterAddress address : addresses) {
             out.add(address.toString());
@@ -74,15 +74,15 @@ public class MyInfoRepository extends DataRepository<MyInfoEndpoint> {
         return getAddressesWithUserInfoByStrings(out);
     }
 
-    public Call<MyResult<User.Data>> getUserInfoByUsername(String username) {
+	public Call<ProfileResult<User.Data>> getUserInfoByUsername(String username) {
         return getInstantService().getUserInfoByUsername(username);
     }
 
-    public Call<MyResult<User.Data>> getUserInfoByUser(User user) {
+	public Call<ProfileResult<User.Data>> getUserInfoByUser(User user) {
         return getUserInfoByUser(user.data);
     }
 
-    public Call<MyResult<User.Data>> getUserInfoByUser(User.Data userData) {
+	public Call<ProfileResult<User.Data>> getUserInfoByUser(User.Data userData) {
         return getUserInfoByUsername(userData.username);
     }
 
@@ -92,7 +92,7 @@ public class MyInfoRepository extends DataRepository<MyInfoEndpoint> {
      * @param input Can be address with prefix 'Mx', username with prefix '@' or email address
      * @return
      */
-    public Call<MyResult<AddressInfoResult>> findAddressInfoByInput(@NonNull String input) {
+    public Call<ProfileResult<AddressInfoResult>> findAddressInfoByInput(@NonNull String input) {
         checkNotNull(input, "Input can't be null");
         checkArgument(!input.isEmpty(), "Input can't be empty string");
         checkArgument(input.length() >= 2, "Input length must have length more than 2 characters");
@@ -111,8 +111,8 @@ public class MyInfoRepository extends DataRepository<MyInfoEndpoint> {
 
     @NonNull
     @Override
-    protected Class<MyInfoEndpoint> getServiceClass() {
-        return MyInfoEndpoint.class;
+    protected Class<ProfileInfoEndpoint> getServiceClass() {
+	    return ProfileInfoEndpoint.class;
     }
 
 }

@@ -23,12 +23,12 @@
  * THE SOFTWARE.
  */
 
-package network.minter.my.api;
+package network.minter.profile.api;
 
 import java.util.List;
 
-import network.minter.my.models.MyAddressData;
-import network.minter.my.models.MyResult;
+import network.minter.profile.models.ProfileAddressData;
+import network.minter.profile.models.ProfileResult;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -39,18 +39,18 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
- * minter-android-myminter. Май 2018
+ * minter-android-profile. Май 2018
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
-public interface MyAddressEndpoint {
+public interface ProfileAddressEndpoint {
 
     /**
      * Get current user address list
      * @return
      */
     @GET("/api/v1/addresses")
-    Call<MyResult<List<MyAddressData>>> getAddresses();
+    Call<ProfileResult<List<ProfileAddressData>>> getAddresses();
 
     /**
      * Get current user address list (with paging)
@@ -59,14 +59,14 @@ public interface MyAddressEndpoint {
      * @return
      */
     @GET("/api/v1/addresses")
-    Call<MyResult<List<MyAddressData>>> getAddresses(@Query("page") int page);
+    Call<ProfileResult<List<ProfileAddressData>>> getAddresses(@Query("page") int page);
 
     /**
      * Get current user address list with encrypted data
      * @return
      */
     @GET("/api/v1/addresses/encrypted")
-    Call<MyResult<List<MyAddressData>>> getAddressesWithEncrypted();
+    Call<ProfileResult<List<ProfileAddressData>>> getAddressesWithEncrypted();
 
     /**
      * Get single address information
@@ -74,7 +74,7 @@ public interface MyAddressEndpoint {
      * @return
      */
     @GET("/api/v1/addresses/{id}")
-    Call<MyResult<MyAddressData>> getAddress(@Path("id") int addressId);
+    Call<ProfileResult<ProfileAddressData>> getAddress(@Path("id") int addressId);
 
     /**
      * Get single address information with encrypted data
@@ -82,27 +82,27 @@ public interface MyAddressEndpoint {
      * @return
      */
     @GET("/api/v1/addresses/{id}/encrypted")
-    Call<MyResult<MyAddressData>> getAddressWithEncrypted(@Path("id") int addressId);
+    Call<ProfileResult<ProfileAddressData>> getAddressWithEncrypted(@Path("id") int addressId);
 
     /**
      * Create new address
-     * @see MyAddressData
+     * @see ProfileAddressData
      * @param data
      * @return
      */
     @POST("/api/v1/addresses")
-    Call<MyResult<Object>> addAddress(@Body MyAddressData data);
+    Call<ProfileResult<Object>> addAddress(@Body ProfileAddressData data);
 
     /**
      * Update existent address
      * @param addressId
-     * @see MyAddressData#id
+     * @see ProfileAddressData#id
      * @param data
-     * @see MyAddressData
+     * @see ProfileAddressData
      * @return
      */
     @PUT("/api/v1/addresses/{id}")
-    Call<MyResult<Object>> updateAddress(@Path("id") String addressId, @Body MyAddressData data);
+    Call<ProfileResult<Object>> updateAddress(@Path("id") String addressId, @Body ProfileAddressData data);
 
     /**
      * Delete existent address by it id
@@ -110,5 +110,5 @@ public interface MyAddressEndpoint {
      * @return
      */
     @DELETE("/api/v1/addresses/{id}")
-    Call<MyResult<Object>> deleteAddress(@Path("id") String addressId);
+    Call<ProfileResult<Object>> deleteAddress(@Path("id") String addressId);
 }

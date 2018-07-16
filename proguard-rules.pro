@@ -1,7 +1,7 @@
 -dontobfuscate
 
--keep public class network.minter.my.** { *; }
--keep public class network.minter.my.MyMinterApi { *; }
+-keep public class network.minter.profile.** { *; }
+-keep public class network.minter.profile.MinterProfileApi { *; }
 
 
 # Parceler library

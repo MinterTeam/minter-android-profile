@@ -23,7 +23,7 @@
  * THE SOFTWARE.
  */
 
-package network.minter.my;
+package network.minter.profile;
 
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -43,33 +43,33 @@ import network.minter.mintercore.internal.api.converters.EncryptedStringSerializ
 import network.minter.mintercore.internal.api.converters.MinterAddressDeserializer;
 import network.minter.mintercore.internal.api.converters.MinterAddressSerializer;
 import network.minter.mintercore.internal.api.converters.UriDeserializer;
-import network.minter.my.repo.MyAddressRepository;
-import network.minter.my.repo.MyAuthRepository;
-import network.minter.my.repo.MyInfoRepository;
-import network.minter.my.repo.MyProfileRepository;
+import network.minter.profile.repo.ProfileAddressRepository;
+import network.minter.profile.repo.ProfileAuthRepository;
+import network.minter.profile.repo.ProfileInfoRepository;
+import network.minter.profile.repo.ProfileRepository;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 import static network.minter.mintercore.internal.common.Preconditions.checkArgument;
 import static network.minter.mintercore.internal.common.Preconditions.checkNotNull;
 
 /**
- * minter-android-myminter. 2018
+ * minter-android-profile. 2018
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
-public class MyMinterApi {
+public class MinterProfileApi {
     private static final String BASE_API_URL = BuildConfig.BASE_API_URL;
-    private static MyMinterApi INSTANCE;
+	private static MinterProfileApi INSTANCE;
     private ApiService.Builder mApiService;
-    private MyAuthRepository mAuthRepository;
-    private MyInfoRepository mInfoRepository;
-    private MyAddressRepository mAddressRepository;
-    private MyProfileRepository mProfileRepository;
+	private ProfileAuthRepository mAuthRepository;
+	private ProfileInfoRepository mInfoRepository;
+	private ProfileAddressRepository mAddressRepository;
+	private ProfileRepository mProfileRepository;
 
-    private MyMinterApi() {
+	private MinterProfileApi() {
         mApiService = new ApiService.Builder(BASE_API_URL, getGsonBuilder());
         mApiService.addHeader("Content-Type", "application/json");
-        mApiService.addHeader("X-Minter-Client-Name", "MinterAndroid (my-minter)");
+		mApiService.addHeader("X-Minter-Client-Name", "MinterAndroid (profile-minter)");
         mApiService.addHeader("X-Minter-Client-Version", BuildConfig.VERSION_NAME);
         mApiService.setDateFormat("yyyy-MM-dd HH:mm:ssX");
     }
@@ -79,7 +79,7 @@ public class MyMinterApi {
             return;
         }
 
-        INSTANCE = new MyMinterApi();
+	    INSTANCE = new MinterProfileApi();
         INSTANCE.mApiService.setDebug(debug);
         INSTANCE.mApiService.setDebugRequestLevel(debug ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
     }
@@ -99,7 +99,7 @@ public class MyMinterApi {
         return BASE_API_URL + "/api/v1/avatar/by/user/" + id;
     }
 
-    public static MyMinterApi getInstance() {
+	public static MinterProfileApi getInstance() {
         return INSTANCE;
     }
 
@@ -121,33 +121,33 @@ public class MyMinterApi {
         return out;
     }
 
-    public MyAuthRepository auth() {
+	public ProfileAuthRepository auth() {
         if (mAuthRepository == null) {
-            mAuthRepository = new MyAuthRepository(mApiService);
+	        mAuthRepository = new ProfileAuthRepository(mApiService);
         }
 
         return mAuthRepository;
     }
 
-    public MyInfoRepository info() {
+	public ProfileInfoRepository info() {
         if (mInfoRepository == null) {
-            mInfoRepository = new MyInfoRepository(mApiService);
+	        mInfoRepository = new ProfileInfoRepository(mApiService);
         }
 
         return mInfoRepository;
     }
 
-    public MyAddressRepository address() {
+	public ProfileAddressRepository address() {
         if (mAddressRepository == null) {
-            mAddressRepository = new MyAddressRepository(mApiService);
+	        mAddressRepository = new ProfileAddressRepository(mApiService);
         }
 
         return mAddressRepository;
     }
 
-    public MyProfileRepository profile() {
+	public ProfileRepository profile() {
         if (mProfileRepository == null) {
-            mProfileRepository = new MyProfileRepository(mApiService);
+	        mProfileRepository = new ProfileRepository(mApiService);
         }
 
         return mProfileRepository;

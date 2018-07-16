@@ -23,24 +23,24 @@
  * THE SOFTWARE.
  */
 
-package network.minter.my.api;
+package network.minter.profile.api;
 
 import java.util.List;
 
-import network.minter.my.models.AddressInfoResult;
-import network.minter.my.models.MyResult;
-import network.minter.my.models.User;
+import network.minter.profile.models.AddressInfoResult;
+import network.minter.profile.models.ProfileResult;
+import network.minter.profile.models.User;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
- * minter-android-myminter. 2018
+ * minter-android-profile. 2018
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
-public interface MyInfoEndpoint {
+public interface ProfileInfoEndpoint {
 
     /**
      * Get address and related user information
@@ -48,7 +48,7 @@ public interface MyInfoEndpoint {
      * @return
      */
     @GET("/api/v1/info/by/address/{address}")
-    Call<MyResult<AddressInfoResult>> getAddressWithUserInfo(@Path("address") String address);
+    Call<ProfileResult<AddressInfoResult>> getAddressWithUserInfo(@Path("address") String address);
 
     /**
      * Get addresses and relates user information
@@ -56,7 +56,7 @@ public interface MyInfoEndpoint {
      * @return
      */
     @GET("/api/v1/info/by/addresses")
-    Call<MyResult<List<AddressInfoResult>>> getAddressesWithUserInfo(@Query(value = "addresses[]", encoded = true) List<String> addresses);
+    Call<ProfileResult<List<AddressInfoResult>>> getAddressesWithUserInfo(@Query(value = "addresses[]", encoded = true) List<String> addresses);
 
     /**
      * Get user information by his username
@@ -64,7 +64,7 @@ public interface MyInfoEndpoint {
      * @return
      */
     @GET("/api/v1/info/by/username/{username}")
-    Call<MyResult<User.Data>> getUserInfoByUsername(@Path("username") String username);
+    Call<ProfileResult<User.Data>> getUserInfoByUsername(@Path("username") String username);
 
     /**
      * Find address by username
@@ -73,7 +73,7 @@ public interface MyInfoEndpoint {
      * @return
      */
     @GET("/api/v1/info/address/by/contact")
-    Call<MyResult<AddressInfoResult>> findAddressByUsername(@Query("username") String username);
+    Call<ProfileResult<AddressInfoResult>> findAddressByUsername(@Query("username") String username);
 
     /**
      * Find address by email
@@ -82,7 +82,7 @@ public interface MyInfoEndpoint {
      * @return
      */
     @GET("/api/v1/info/address/by/contact")
-    Call<MyResult<AddressInfoResult>> findAddressByEmail(@Query("email") String username);
+    Call<ProfileResult<AddressInfoResult>> findAddressByEmail(@Query("email") String username);
 
 }
 

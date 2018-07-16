@@ -55,7 +55,7 @@ ext {
     minterBuildTools = "28.0.0"
     minterLibSupport = "27.1.1"
     minterSdkVers = "1.0.0"
-    pomDescription = "Android Minter Core SDK"
+    pomDescription = "Android ProfileAPI SDK"
 }
 
 apply plugin: 'com.android.library'

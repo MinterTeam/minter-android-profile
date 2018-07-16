@@ -23,14 +23,14 @@
  * THE SOFTWARE.
  */
 
-package network.minter.my.models;
+package network.minter.profile.models;
 
 import org.parceler.Parcel;
 
 import network.minter.mintercore.crypto.HashUtil;
 
 /**
- * minter-android-myminter. 2018
+ * minter-android-profile. 2018
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */

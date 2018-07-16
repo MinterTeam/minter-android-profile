@@ -23,33 +23,19 @@
  * THE SOFTWARE.
  */
 
-package network.minter.my.models;
-
-import android.net.Uri;
+package network.minter.profile.models;
 
 import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
 
-import java.util.List;
-
 /**
- * minter-android-myminter. 2018
+ * minter-android-profile. 2018
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
 @Parcel
-public class ProfileRequestResult {
-    public List<Confirmation> confirmations;
-
-    public enum ConfirmType {
-        @SerializedName("phone") Phone,
-        @SerializedName("email") Email,
-    }
-
-    @Parcel
-    public static class Confirmation {
-        public Uri endpoint;
-        public ConfirmType type;
-    }
+public class UsernameData {
+    public String username;
+    @SerializedName("is_available") public boolean isAvailable;
 }

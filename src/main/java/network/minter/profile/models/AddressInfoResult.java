@@ -23,19 +23,19 @@
  * THE SOFTWARE.
  */
 
-package network.minter.my.models;
-
-import com.google.gson.annotations.SerializedName;
+package network.minter.profile.models;
 
 import org.parceler.Parcel;
 
+import network.minter.mintercore.crypto.MinterAddress;
+
 /**
- * minter-android-myminter. 2018
+ * minter-android-profile. 2018
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
 @Parcel
-public class UsernameData {
-    public String username;
-    @SerializedName("is_available") public boolean isAvailable;
+public class AddressInfoResult {
+    public MinterAddress address;
+    public User.Data user;
 }

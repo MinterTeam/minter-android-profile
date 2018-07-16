@@ -23,7 +23,7 @@
  * THE SOFTWARE.
  */
 
-package network.minter.my.models;
+package network.minter.profile.models;
 
 import org.parceler.Parcel;
 
@@ -32,11 +32,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * minter-android-myminter. 2018
+ * minter-android-profile. 2018
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
-public class MyResult<Result> {
+public class ProfileResult<Result> {
     public Result data;
     public Error error;
     public Meta meta;

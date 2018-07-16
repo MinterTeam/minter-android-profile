@@ -23,33 +23,33 @@
  * THE SOFTWARE.
  */
 
-package network.minter.my.api;
+package network.minter.profile.models;
 
-import network.minter.my.models.LoginData;
-import network.minter.my.models.MyResult;
-import network.minter.my.models.ProfileRequestResult;
-import network.minter.my.models.RegisterData;
-import network.minter.my.models.User;
-import network.minter.my.models.UsernameData;
-import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.Path;
+import android.net.Uri;
+
+import com.google.gson.annotations.SerializedName;
+
+import org.parceler.Parcel;
+
+import java.util.List;
 
 /**
- * minter-android-myminter. 2018
+ * minter-android-profile. 2018
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
-public interface MyAuthEndpoint {
-    @POST("/api/v1/login")
-    Call<MyResult<User>> login(@Body LoginData data);
+@Parcel
+public class ProfileRequestResult {
+    public List<Confirmation> confirmations;
 
-    @POST("/api/v1/register")
-    Call<MyResult<ProfileRequestResult>> register(@Body RegisterData data);
+    public enum ConfirmType {
+        @SerializedName("phone") Phone,
+        @SerializedName("email") Email,
+    }
 
-    @GET("/api/v1/username/{username}")
-    Call<MyResult<UsernameData>> checkUsernameAvailability(@Path("username") String username);
-
+    @Parcel
+    public static class Confirmation {
+        public Uri endpoint;
+        public ConfirmType type;
+    }
 }

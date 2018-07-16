@@ -23,28 +23,28 @@
  * THE SOFTWARE.
  */
 
-package network.minter.my.repo;
+package network.minter.profile.repo;
 
 import android.support.annotation.NonNull;
 
 import network.minter.mintercore.internal.api.ApiService;
 import network.minter.mintercore.internal.data.DataRepository;
-import network.minter.my.api.MyAuthEndpoint;
-import network.minter.my.models.LoginData;
-import network.minter.my.models.MyResult;
-import network.minter.my.models.ProfileRequestResult;
-import network.minter.my.models.RegisterData;
-import network.minter.my.models.User;
-import network.minter.my.models.UsernameData;
+import network.minter.profile.api.ProfileAuthEndpoint;
+import network.minter.profile.models.LoginData;
+import network.minter.profile.models.ProfileRequestResult;
+import network.minter.profile.models.ProfileResult;
+import network.minter.profile.models.RegisterData;
+import network.minter.profile.models.User;
+import network.minter.profile.models.UsernameData;
 import retrofit2.Call;
 
 /**
- * minter-android-myminter. 2018
+ * minter-android-profile. 2018
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
-public class MyAuthRepository extends DataRepository<MyAuthEndpoint> implements DataRepository.Configurator {
-    public MyAuthRepository(@NonNull ApiService.Builder apiBuilder) {
+public class ProfileAuthRepository extends DataRepository<ProfileAuthEndpoint> implements DataRepository.Configurator {
+	public ProfileAuthRepository(@NonNull ApiService.Builder apiBuilder) {
         super(apiBuilder);
     }
 
@@ -55,19 +55,19 @@ public class MyAuthRepository extends DataRepository<MyAuthEndpoint> implements 
 
     @NonNull
     @Override
-    protected Class<MyAuthEndpoint> getServiceClass() {
-        return MyAuthEndpoint.class;
+    protected Class<ProfileAuthEndpoint> getServiceClass() {
+	    return ProfileAuthEndpoint.class;
     }
 
-    public Call<MyResult<User>> login(LoginData loginData) {
+	public Call<ProfileResult<User>> login(LoginData loginData) {
         return getService().login(loginData);
     }
 
-    public Call<MyResult<ProfileRequestResult>> register(RegisterData registerData) {
+	public Call<ProfileResult<ProfileRequestResult>> register(RegisterData registerData) {
         return getInstantService(this).register(registerData);
     }
 
-    public Call<MyResult<UsernameData>> checkUsernameAvailability(String username) {
+	public Call<ProfileResult<UsernameData>> checkUsernameAvailability(String username) {
         return getInstantService(this).checkUsernameAvailability(username);
     }
 }

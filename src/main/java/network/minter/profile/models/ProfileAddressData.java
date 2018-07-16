@@ -23,7 +23,7 @@
  * THE SOFTWARE.
  */
 
-package network.minter.my.models;
+package network.minter.profile.models;
 
 import org.parceler.Parcel;
 
@@ -42,22 +42,22 @@ import network.minter.mintercore.crypto.MinterAddress;
 import static network.minter.mintercore.internal.common.Preconditions.checkNotNull;
 
 /**
- * minter-android-myminter. 2018
+ * minter-android-profile. 2018
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
 @Parcel
-public class MyAddressData {
+public class ProfileAddressData {
     public String id;
     public MinterAddress address;
     public boolean isMain;
     public boolean isServerSecured;
     public EncryptedString encrypted;
 
-    public MyAddressData() {
+	public ProfileAddressData() {
     }
 
-    public MyAddressData(final MinterAddress address, boolean isMain, final String seedPhrase, boolean isServerSecured, final String encryptionKey) {
+	public ProfileAddressData(final MinterAddress address, boolean isMain, final String seedPhrase, boolean isServerSecured, final String encryptionKey) {
         this.address = checkNotNull(address, "Address required");
         this.isMain = isMain;
         this.isServerSecured = isServerSecured;

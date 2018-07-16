@@ -23,14 +23,14 @@
  * THE SOFTWARE.
  */
 
-package network.minter.my.api;
+package network.minter.profile.api;
 
 import java.util.Map;
 
-import network.minter.my.models.MyResult;
-import network.minter.my.models.PasswordChangeRequest;
-import network.minter.my.models.ProfileRequestResult;
-import network.minter.my.models.User;
+import network.minter.profile.models.PasswordChangeRequest;
+import network.minter.profile.models.ProfileRequestResult;
+import network.minter.profile.models.ProfileResult;
+import network.minter.profile.models.User;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -46,36 +46,36 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 /**
- * minter-android-myminter. 2018
+ * minter-android-profile. 2018
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
-public interface MyProfileEndpoint {
+public interface ProfileEndpoint {
 
     /**
      * Get current user profile data
      */
     @GET("/api/v1/profile")
-    Call<MyResult<User.Data>> getProfile();
+    Call<ProfileResult<User.Data>> getProfile();
 
     /**
      * Update current user profile
      */
     @PUT("/api/v1/profile")
-    Call<MyResult<ProfileRequestResult>> updateProfile(@Body User.Data data);
+    Call<ProfileResult<ProfileRequestResult>> updateProfile(@Body User.Data data);
 
     /**
      * Update current user profile with specified map
      */
     @PUT("/api/v1/profile")
     @Headers({"Content-Type: application/json"})
-    Call<MyResult<ProfileRequestResult>> updateProfile(@Body Map<String, String> data);
+    Call<ProfileResult<ProfileRequestResult>> updateProfile(@Body Map<String, String> data);
 
     /**
      * Get current user avatar url
      */
     @GET("/api/v1/profile/avatar")
-    Call<MyResult<User.Avatar>> getAvatar();
+    Call<ProfileResult<User.Avatar>> getAvatar();
 
     /**
      * Upload current user avatar (multipart data)
@@ -85,7 +85,7 @@ public interface MyProfileEndpoint {
      */
     @Multipart
     @POST("/api/v1/profile/avatar")
-    Call<MyResult<User.Avatar>> updateAvatarMultipart(@Part MultipartBody.Part file);
+    Call<ProfileResult<User.Avatar>> updateAvatarMultipart(@Part MultipartBody.Part file);
 
     /**
      * Upload current user avatar (base64 encoded image)
@@ -94,13 +94,13 @@ public interface MyProfileEndpoint {
      */
     @FormUrlEncoded
     @POST("/api/v1/profile/avatar")
-    Call<MyResult<User.Avatar>> updateAvatarBase64(@Field("avatarBase64") String file);
+    Call<ProfileResult<User.Avatar>> updateAvatarBase64(@Field("avatarBase64") String file);
 
     /**
      * Delete avatar
      */
     @DELETE("/api/v1/profile/avatar")
-    Call<MyResult<Void>> deleteAvatar();
+    Call<ProfileResult<Void>> deleteAvatar();
 
     /**
      * 2-factor auth confirmation
@@ -110,7 +110,7 @@ public interface MyProfileEndpoint {
      */
     @FormUrlEncoded
     @POST("/api/v1/profile/confirm/{id}")
-    Call<MyResult<Void>> confirmProfile(@Path("id") String id, @Field("code") String code);
+    Call<ProfileResult<Void>> confirmProfile(@Path("id") String id, @Field("code") String code);
 
     /**
      * Change password and replace encrypted data with new password re-encrypted
@@ -119,5 +119,5 @@ public interface MyProfileEndpoint {
      * @return
      */
     @POST("/api/v1/profile/password")
-    Call<MyResult<Object>> changePassword(@Body PasswordChangeRequest data);
+    Call<ProfileResult<Object>> changePassword(@Body PasswordChangeRequest data);
 }

@@ -23,56 +23,33 @@
  * THE SOFTWARE.
  */
 
-package network.minter.my.models;
+package network.minter.profile.api;
 
-import org.parceler.Parcel;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import network.minter.mintercore.crypto.EncryptedString;
-import network.minter.mintercore.crypto.HashUtil;
-
-import static network.minter.mintercore.internal.common.Preconditions.checkNotNull;
+import network.minter.profile.models.LoginData;
+import network.minter.profile.models.ProfileRequestResult;
+import network.minter.profile.models.ProfileResult;
+import network.minter.profile.models.RegisterData;
+import network.minter.profile.models.User;
+import network.minter.profile.models.UsernameData;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 /**
- * minter-android-myminter. 2018
+ * minter-android-profile. 2018
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
-@Parcel
-public class PasswordChangeRequest {
+public interface ProfileAuthEndpoint {
+    @POST("/api/v1/login")
+    Call<ProfileResult<User>> login(@Body LoginData data);
 
-    public String newPassword;
-    public List<EncryptedData> addressesEncryptedData;
+    @POST("/api/v1/register")
+    Call<ProfileResult<ProfileRequestResult>> register(@Body RegisterData data);
 
-    public void setRawPassword(String password) {
-        checkNotNull(password);
-        newPassword = HashUtil.sha256HexDouble(password);
-    }
-
-    public void addEncrypted(MyAddressData data) {
-        if (addressesEncryptedData == null) {
-            addressesEncryptedData = new ArrayList<>();
-        }
-
-        final EncryptedData d = new EncryptedData();
-        d.id = data.id;
-        d.encrypted = data.encrypted;
-        addressesEncryptedData.add(d);
-    }
-
-    public void addEncrypted(List<MyAddressData> items) {
-        for (MyAddressData d : items) {
-            addEncrypted(d);
-        }
-    }
-
-    @Parcel
-    public static final class EncryptedData {
-        public String id;
-        public EncryptedString encrypted;
-    }
-
+    @GET("/api/v1/username/{username}")
+    Call<ProfileResult<UsernameData>> checkUsernameAvailability(@Path("username") String username);
 
 }

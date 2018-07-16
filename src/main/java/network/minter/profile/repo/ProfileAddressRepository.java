@@ -23,7 +23,7 @@
  * THE SOFTWARE.
  */
 
-package network.minter.my.repo;
+package network.minter.profile.repo;
 
 import android.support.annotation.NonNull;
 
@@ -31,50 +31,50 @@ import java.util.List;
 
 import network.minter.mintercore.internal.api.ApiService;
 import network.minter.mintercore.internal.data.DataRepository;
-import network.minter.my.api.MyAddressEndpoint;
-import network.minter.my.models.MyAddressData;
-import network.minter.my.models.MyResult;
+import network.minter.profile.api.ProfileAddressEndpoint;
+import network.minter.profile.models.ProfileAddressData;
+import network.minter.profile.models.ProfileResult;
 import retrofit2.Call;
 
 /**
- * minter-android-myminter. 2018
+ * minter-android-profile. 2018
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
-public class MyAddressRepository extends DataRepository<MyAddressEndpoint> implements DataRepository.Configurator {
-    public MyAddressRepository(@NonNull ApiService.Builder apiBuilder) {
+public class ProfileAddressRepository extends DataRepository<ProfileAddressEndpoint> implements DataRepository.Configurator {
+	public ProfileAddressRepository(@NonNull ApiService.Builder apiBuilder) {
         super(apiBuilder);
     }
 
-    public Call<MyResult<List<MyAddressData>>> getAddresses() {
+	public Call<ProfileResult<List<ProfileAddressData>>> getAddresses() {
         return getInstantService(this).getAddresses();
     }
 
-    public Call<MyResult<List<MyAddressData>>> getAddresses(int page) {
+	public Call<ProfileResult<List<ProfileAddressData>>> getAddresses(int page) {
         return getInstantService(this).getAddresses(page);
     }
 
-    public Call<MyResult<List<MyAddressData>>> getAddressesWithEncrypted() {
+	public Call<ProfileResult<List<ProfileAddressData>>> getAddressesWithEncrypted() {
         return getInstantService(this).getAddressesWithEncrypted();
     }
 
-    public Call<MyResult<Object>> delete(String addressId) {
+	public Call<ProfileResult<Object>> delete(String addressId) {
         return getInstantService(this).deleteAddress(addressId);
     }
 
-    public Call<MyResult<Object>> delete(MyAddressData address) {
+	public Call<ProfileResult<Object>> delete(ProfileAddressData address) {
         return delete(address.id);
     }
 
-    public Call<MyResult<Object>> addAddress(MyAddressData data) {
+	public Call<ProfileResult<Object>> addAddress(ProfileAddressData data) {
         return getInstantService(this).addAddress(data);
     }
 
-    public Call<MyResult<Object>> updateAddress(MyAddressData addressData) {
+	public Call<ProfileResult<Object>> updateAddress(ProfileAddressData addressData) {
         return getInstantService(this).updateAddress(addressData.id, addressData);
     }
 
-    public Call<MyResult<Object>> setAddressMain(boolean isMain, MyAddressData data) {
+	public Call<ProfileResult<Object>> setAddressMain(boolean isMain, ProfileAddressData data) {
         data.isMain = isMain;
         return getInstantService(this).updateAddress(data.id, data);
     }
@@ -86,8 +86,8 @@ public class MyAddressRepository extends DataRepository<MyAddressEndpoint> imple
 
     @NonNull
     @Override
-    protected Class<MyAddressEndpoint> getServiceClass() {
-        return MyAddressEndpoint.class;
+    protected Class<ProfileAddressEndpoint> getServiceClass() {
+	    return ProfileAddressEndpoint.class;
     }
 
 }

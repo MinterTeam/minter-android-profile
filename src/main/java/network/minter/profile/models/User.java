@@ -23,7 +23,7 @@
  * THE SOFTWARE.
  */
 
-package network.minter.my.models;
+package network.minter.profile.models;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -31,10 +31,10 @@ import org.parceler.Parcel;
 
 import java.util.Locale;
 
-import network.minter.my.MyMinterApi;
+import network.minter.profile.MinterProfileApi;
 
 /**
- * minter-android-myminter. 2018
+ * minter-android-profile. 2018
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
@@ -82,7 +82,7 @@ public class User {
         public String phone;
         public String language;
         public Avatar avatar;
-        public MyAddressData mainAddress;
+	    public ProfileAddressData mainAddress;
 
         public boolean hasAvatar() {
             return avatar != null;
@@ -121,11 +121,11 @@ public class User {
 
         public String getUrl() {
             if (id < 0) {
-                return MyMinterApi.getUserAvatarUrl(1);
+	            return MinterProfileApi.getUserAvatarUrl(1);
             }
 
             if (src == null && id > 0) {
-                return MyMinterApi.getUserAvatarUrl(id);
+	            return MinterProfileApi.getUserAvatarUrl(id);
             }
 
             return src;
