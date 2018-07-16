@@ -27,8 +27,8 @@ package network.minter.profile.repo;
 
 import android.support.annotation.NonNull;
 
-import network.minter.mintercore.internal.api.ApiService;
-import network.minter.mintercore.internal.data.DataRepository;
+import network.minter.core.internal.api.ApiService;
+import network.minter.core.internal.data.DataRepository;
 import network.minter.profile.api.ProfileAuthEndpoint;
 import network.minter.profile.models.LoginData;
 import network.minter.profile.models.ProfileRequestResult;

@@ -29,8 +29,8 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
-import network.minter.mintercore.internal.api.ApiService;
-import network.minter.mintercore.internal.data.DataRepository;
+import network.minter.core.internal.api.ApiService;
+import network.minter.core.internal.data.DataRepository;
 import network.minter.profile.api.ProfileAddressEndpoint;
 import network.minter.profile.models.ProfileAddressData;
 import network.minter.profile.models.ProfileResult;

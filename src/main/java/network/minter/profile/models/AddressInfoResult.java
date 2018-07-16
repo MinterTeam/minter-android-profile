@@ -27,7 +27,7 @@ package network.minter.profile.models;
 
 import org.parceler.Parcel;
 
-import network.minter.mintercore.crypto.MinterAddress;
+import network.minter.core.crypto.MinterAddress;
 
 /**
  * minter-android-profile. 2018

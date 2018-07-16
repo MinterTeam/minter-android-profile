@@ -36,10 +36,10 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-import network.minter.mintercore.crypto.EncryptedString;
-import network.minter.mintercore.crypto.MinterAddress;
+import network.minter.core.crypto.EncryptedString;
+import network.minter.core.crypto.MinterAddress;
 
-import static network.minter.mintercore.internal.common.Preconditions.checkNotNull;
+import static network.minter.core.internal.common.Preconditions.checkNotNull;
 
 /**
  * minter-android-profile. 2018

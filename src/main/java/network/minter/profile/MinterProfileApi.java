@@ -32,25 +32,25 @@ import com.google.gson.GsonBuilder;
 
 import java.math.BigInteger;
 
-import network.minter.mintercore.crypto.BytesData;
-import network.minter.mintercore.crypto.EncryptedString;
-import network.minter.mintercore.crypto.MinterAddress;
-import network.minter.mintercore.internal.api.ApiService;
-import network.minter.mintercore.internal.api.converters.BigIntegerDeserializer;
-import network.minter.mintercore.internal.api.converters.BytesDataDeserializer;
-import network.minter.mintercore.internal.api.converters.EncryptedStringDeserializer;
-import network.minter.mintercore.internal.api.converters.EncryptedStringSerializer;
-import network.minter.mintercore.internal.api.converters.MinterAddressDeserializer;
-import network.minter.mintercore.internal.api.converters.MinterAddressSerializer;
-import network.minter.mintercore.internal.api.converters.UriDeserializer;
+import network.minter.core.crypto.BytesData;
+import network.minter.core.crypto.EncryptedString;
+import network.minter.core.crypto.MinterAddress;
+import network.minter.core.internal.api.ApiService;
+import network.minter.core.internal.api.converters.BigIntegerDeserializer;
+import network.minter.core.internal.api.converters.BytesDataDeserializer;
+import network.minter.core.internal.api.converters.EncryptedStringDeserializer;
+import network.minter.core.internal.api.converters.EncryptedStringSerializer;
+import network.minter.core.internal.api.converters.MinterAddressDeserializer;
+import network.minter.core.internal.api.converters.MinterAddressSerializer;
+import network.minter.core.internal.api.converters.UriDeserializer;
 import network.minter.profile.repo.ProfileAddressRepository;
 import network.minter.profile.repo.ProfileAuthRepository;
 import network.minter.profile.repo.ProfileInfoRepository;
 import network.minter.profile.repo.ProfileRepository;
 import okhttp3.logging.HttpLoggingInterceptor;
 
-import static network.minter.mintercore.internal.common.Preconditions.checkArgument;
-import static network.minter.mintercore.internal.common.Preconditions.checkNotNull;
+import static network.minter.core.internal.common.Preconditions.checkArgument;
+import static network.minter.core.internal.common.Preconditions.checkNotNull;
 
 /**
  * minter-android-profile. 2018
@@ -69,7 +69,7 @@ public class MinterProfileApi {
 	private MinterProfileApi() {
         mApiService = new ApiService.Builder(BASE_API_URL, getGsonBuilder());
         mApiService.addHeader("Content-Type", "application/json");
-		mApiService.addHeader("X-Minter-Client-Name", "MinterAndroid (profile-minter)");
+		mApiService.addHeader("X-Minter-Client-Name", "MinterAndroid (profile)");
         mApiService.addHeader("X-Minter-Client-Version", BuildConfig.VERSION_NAME);
         mApiService.setDateFormat("yyyy-MM-dd HH:mm:ssX");
     }

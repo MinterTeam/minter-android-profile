@@ -30,18 +30,18 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import network.minter.mintercore.MinterSDK;
-import network.minter.mintercore.crypto.MinterAddress;
-import network.minter.mintercore.internal.api.ApiService;
-import network.minter.mintercore.internal.data.DataRepository;
+import network.minter.core.MinterSDK;
+import network.minter.core.crypto.MinterAddress;
+import network.minter.core.internal.api.ApiService;
+import network.minter.core.internal.data.DataRepository;
 import network.minter.profile.api.ProfileInfoEndpoint;
 import network.minter.profile.models.AddressInfoResult;
 import network.minter.profile.models.ProfileResult;
 import network.minter.profile.models.User;
 import retrofit2.Call;
 
-import static network.minter.mintercore.internal.common.Preconditions.checkArgument;
-import static network.minter.mintercore.internal.common.Preconditions.checkNotNull;
+import static network.minter.core.internal.common.Preconditions.checkArgument;
+import static network.minter.core.internal.common.Preconditions.checkNotNull;
 
 /**
  * minter-android-profile. 2018

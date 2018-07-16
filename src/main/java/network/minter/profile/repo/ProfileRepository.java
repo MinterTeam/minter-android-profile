@@ -29,9 +29,9 @@ import android.support.annotation.NonNull;
 
 import java.util.Map;
 
-import network.minter.mintercore.internal.api.ApiService;
-import network.minter.mintercore.internal.data.DataRepository;
-import network.minter.mintercore.internal.helpers.CollectionsHelper;
+import network.minter.core.internal.api.ApiService;
+import network.minter.core.internal.data.DataRepository;
+import network.minter.core.internal.helpers.CollectionsHelper;
 import network.minter.profile.api.ProfileEndpoint;
 import network.minter.profile.models.PasswordChangeRequest;
 import network.minter.profile.models.ProfileRequestResult;
@@ -39,7 +39,7 @@ import network.minter.profile.models.ProfileResult;
 import network.minter.profile.models.User;
 import retrofit2.Call;
 
-import static network.minter.mintercore.internal.common.Preconditions.checkNotNull;
+import static network.minter.core.internal.common.Preconditions.checkNotNull;
 
 /**
  * minter-android-profile. 2018
