@@ -30,8 +30,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0-beta02'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
+        classpath 'com.android.tools.build:gradle:3.2.0-beta05'
     }
 }
 
@@ -128,8 +127,8 @@ dependencies {
 
     // stuff
     implementation 'com.jakewharton.timber:timber:4.5.1'
-    implementation 'org.parceler:parceler-api:1.1.10'
-    annotationProcessor 'org.parceler:parceler:1.1.10'
+    implementation 'org.parceler:parceler-api:1.1.11'
+    annotationProcessor 'org.parceler:parceler:1.1.11'
 }
 
 apply from: 'scripts/minter_publish.gradle'
