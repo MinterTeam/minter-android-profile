@@ -55,59 +55,97 @@ import static network.minter.core.internal.common.Preconditions.checkNotNull;
 
 /**
  * minter-android-profile. 2018
- *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
 public class MinterProfileApi {
     private static final String BASE_API_URL = BuildConfig.BASE_API_URL;
-	private static MinterProfileApi INSTANCE;
+    private static MinterProfileApi INSTANCE;
     private ApiService.Builder mApiService;
-	private ProfileAuthRepository mAuthRepository;
-	private ProfileInfoRepository mInfoRepository;
-	private ProfileAddressRepository mAddressRepository;
-	private ProfileRepository mProfileRepository;
+    private ProfileAuthRepository mAuthRepository;
+    private ProfileInfoRepository mInfoRepository;
+    private ProfileAddressRepository mAddressRepository;
+    private ProfileRepository mProfileRepository;
 
-	private MinterProfileApi() {
+    private MinterProfileApi() {
         mApiService = new ApiService.Builder(BASE_API_URL, getGsonBuilder());
         mApiService.addHeader("Content-Type", "application/json");
-		mApiService.addHeader("X-Minter-Client-Name", "MinterAndroid (profile)");
+        mApiService.addHeader("X-Minter-Client-Name", "MinterAndroid (profile)");
         mApiService.addHeader("X-Minter-Client-Version", BuildConfig.VERSION_NAME);
         mApiService.setDateFormat("yyyy-MM-dd HH:mm:ssX");
     }
 
+    /**
+     * Init sdk with no debug log
+     */
+    public static void initialize() {
+        initialize(false);
+    }
+
+    /**
+     * Init sdk with debug log
+     * @param debug
+     */
     public static void initialize(boolean debug) {
         if (INSTANCE != null) {
             return;
         }
 
-	    INSTANCE = new MinterProfileApi();
+        INSTANCE = new MinterProfileApi();
         INSTANCE.mApiService.setDebug(debug);
         INSTANCE.mApiService.setDebugRequestLevel(debug ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
     }
 
+    /**
+     * Return constant coin avatar url using coin name
+     * @param coinName string coin name (min len: 3, max: 10)
+     * @return coin avatar url (if coin does not exists, returns some default avatar)
+     */
     public static String getCoinAvatarUrl(final @NonNull String coinName) {
         checkNotNull(coinName, "Coin name can't be null");
         checkArgument(coinName.length() >= 3 && coinName.length() <= 10, "Coin length must be from 3 to 10 chars");
         return BASE_API_URL + "/api/v1/avatar/by/coin/" + coinName.toUpperCase();
     }
 
+    /**
+     * Return constant user avatar url using user id
+     * @param id user id
+     * @return user avatar url (if user does not exists, returns some default avatar)
+     */
     public static String getUserAvatarUrl(long id) {
         return getUserAvatarUrl(String.valueOf(id));
     }
 
+    /**
+     * Return constant user avatar url using user id
+     * @param id string representation of numeric id
+     * @return user avatar url (if user does not exists, returns some default avatar)
+     * @see #getUserAvatarUrl(long)
+     */
     public static String getUserAvatarUrl(String id) {
         checkNotNull(id, "Id required");
         return BASE_API_URL + "/api/v1/avatar/by/user/" + id;
     }
 
-	public static MinterProfileApi getInstance() {
+    /**
+     * Singleton sdk instance
+     * @return
+     */
+    public static MinterProfileApi getInstance() {
         return INSTANCE;
     }
 
+    /**
+     * Api service builder instance
+     * @return
+     */
     public ApiService.Builder getApiService() {
         return mApiService;
     }
 
+    /**
+     * Creates new gson builder with predefined type adapters used in sdk
+     * @return GsonBuilder
+     */
     public GsonBuilder getGsonBuilder() {
         GsonBuilder out = new GsonBuilder();
         out.registerTypeAdapter(MinterAddress.class, new MinterAddressDeserializer());
@@ -122,33 +160,57 @@ public class MinterProfileApi {
         return out;
     }
 
-	public ProfileAuthRepository auth() {
+    /**
+     * Auth api repository
+     * @return
+     * @see ProfileAuthRepository
+     * @see network.minter.profile.api.ProfileAuthEndpoint
+     */
+    public ProfileAuthRepository auth() {
         if (mAuthRepository == null) {
-	        mAuthRepository = new ProfileAuthRepository(mApiService);
+            mAuthRepository = new ProfileAuthRepository(mApiService);
         }
 
         return mAuthRepository;
     }
 
-	public ProfileInfoRepository info() {
+    /**
+     * Info api repository
+     * @return
+     * @see ProfileInfoRepository
+     * @see network.minter.profile.api.ProfileInfoEndpoint
+     */
+    public ProfileInfoRepository info() {
         if (mInfoRepository == null) {
-	        mInfoRepository = new ProfileInfoRepository(mApiService);
+            mInfoRepository = new ProfileInfoRepository(mApiService);
         }
 
         return mInfoRepository;
     }
 
-	public ProfileAddressRepository address() {
+    /**
+     * Address api repository
+     * @return
+     * @see ProfileAddressRepository
+     * @see network.minter.profile.api.ProfileAddressEndpoint
+     */
+    public ProfileAddressRepository address() {
         if (mAddressRepository == null) {
-	        mAddressRepository = new ProfileAddressRepository(mApiService);
+            mAddressRepository = new ProfileAddressRepository(mApiService);
         }
 
         return mAddressRepository;
     }
 
-	public ProfileRepository profile() {
+    /**
+     * User profile api repository
+     * @return
+     * @see ProfileRepository
+     * @see network.minter.profile.api.ProfileEndpoint
+     */
+    public ProfileRepository profile() {
         if (mProfileRepository == null) {
-	        mProfileRepository = new ProfileRepository(mApiService);
+            mProfileRepository = new ProfileRepository(mApiService);
         }
 
         return mProfileRepository;
