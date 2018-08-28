@@ -46,6 +46,7 @@ import static network.minter.core.internal.common.Preconditions.checkNotNull;
 
 /**
  * minter-android-profile. 2018
+ * Public user information api repository
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
@@ -54,19 +55,39 @@ public class ProfileInfoRepository extends DataRepository<ProfileInfoEndpoint> {
         super(apiBuilder);
     }
 
-	public Call<ProfileResult<AddressInfoResult>> getAddressWithUserInfo(String address) {
+    /**
+     * Getting blockchain address information with owner user data
+     * @param address any minter address with prefix "Mx"
+     * @return
+     */
+    public Call<ProfileResult<AddressInfoResult>> getAddressWithUserInfo(String address) {
         return getInstantService().getAddressWithUserInfo(address);
     }
 
-	public Call<ProfileResult<AddressInfoResult>> getAddressWithUserInfo(MinterAddress address) {
+    /**
+     * Getting blockchain address information with owner user data
+     * @param address minter address object
+     * @return
+     */
+    public Call<ProfileResult<AddressInfoResult>> getAddressWithUserInfo(MinterAddress address) {
         return getAddressWithUserInfo(address.toString());
     }
 
-	public Call<ProfileResult<List<AddressInfoResult>>> getAddressesWithUserInfoByStrings(List<String> addresses) {
+    /**
+     * Getting multiple blockchain addresses information with owner user data
+     * @param addresses list (strings with prefix "Mx") of blockchain addresses
+     * @return
+     */
+    public Call<ProfileResult<List<AddressInfoResult>>> getAddressesWithUserInfoByStrings(List<String> addresses) {
         return getInstantService().getAddressesWithUserInfo(addresses);
     }
 
-	public Call<ProfileResult<List<AddressInfoResult>>> getAddressesWithUserInfo(List<MinterAddress> addresses) {
+    /**
+     * Get multiple blockchain addresses information with owner user data
+     * @param addresses list of blockchain addresses
+     * @return
+     */
+    public Call<ProfileResult<List<AddressInfoResult>>> getAddressesWithUserInfo(List<MinterAddress> addresses) {
         final List<String> out = new ArrayList<>(addresses.size());
         for (MinterAddress address : addresses) {
             out.add(address.toString());
@@ -75,15 +96,30 @@ public class ProfileInfoRepository extends DataRepository<ProfileInfoEndpoint> {
         return getAddressesWithUserInfoByStrings(out);
     }
 
-	public Call<ProfileResult<User.Data>> getUserInfoByUsername(String username) {
+    /**
+     * Get user information by his username
+     * @param username username string WITHOUT "@" before name
+     * @return
+     */
+    public Call<ProfileResult<User.Data>> getUserInfoByUsername(String username) {
         return getInstantService().getUserInfoByUsername(username);
     }
 
-	public Call<ProfileResult<User.Data>> getUserInfoByUser(User user) {
+    /**
+     * Get user information by his username using user model
+     * @param user user model
+     * @return
+     */
+    public Call<ProfileResult<User.Data>> getUserInfoByUser(User user) {
         return getUserInfoByUser(user.data);
     }
 
-	public Call<ProfileResult<User.Data>> getUserInfoByUser(User.Data userData) {
+    /**
+     * Get user information by his username
+     * @param userData user profile data model
+     * @return
+     */
+    public Call<ProfileResult<User.Data>> getUserInfoByUser(User.Data userData) {
         return getUserInfoByUsername(userData.username);
     }
 

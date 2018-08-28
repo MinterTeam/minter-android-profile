@@ -44,6 +44,7 @@ import static network.minter.core.internal.common.Preconditions.checkNotNull;
 
 /**
  * minter-android-profile. 2018
+ * Private user data api repository
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
@@ -52,25 +53,51 @@ public class ProfileRepository extends DataRepository<ProfileEndpoint> implement
         super(apiBuilder);
     }
 
-	public Call<ProfileResult<User.Data>> getProfile() {
-        return getService().getProfile();
+    /**
+     * Getting user profile from web console
+     * @return
+     */
+    public Call<ProfileResult<User.Data>> getProfile() {
+        return getInstantService().getProfile();
     }
 
-	public Call<ProfileResult<ProfileRequestResult>> updateProfile(@NonNull User.Data data) {
+    /**
+     * Updating user profile by profile data
+     * @param data
+     * @return
+     */
+    public Call<ProfileResult<ProfileRequestResult>> updateProfile(@NonNull User.Data data) {
         checkNotNull(data);
         return getInstantService(this).updateProfile(data);
     }
 
-	public Call<ProfileResult<ProfileRequestResult>> updateField(String field, String value) {
+    /**
+     * Updating user profile field by name and value
+     * @param field field name (email, username etc)
+     * @param value string value
+     * @return
+     */
+    public Call<ProfileResult<ProfileRequestResult>> updateField(String field, String value) {
         Map<String, String> data = CollectionsHelper.asMap(field, value);
         return getInstantService(this).updateProfile(data);
     }
 
-	public Call<ProfileResult<User.Avatar>> updateAvatar(String b64) {
+    /**
+     * Upload base64 encoded avatar
+     * @param b64 base64 encoded string
+     * @return
+     * @see ProfileEndpoint#updateAvatarBase64(String)
+     */
+    public Call<ProfileResult<User.Avatar>> updateAvatar(String b64) {
         return getInstantService(this).updateAvatarBase64(b64);
     }
 
-	public Call<ProfileResult<Object>> changePassword(PasswordChangeRequest data) {
+    /**
+     * Update user password using complex transaction (changing password leads re-encrypting whole encrypted data)
+     * @param data model to update
+     * @return
+     */
+    public Call<ProfileResult<Object>> changePassword(PasswordChangeRequest data) {
         return getInstantService(this).changePassword(data);
     }
 
@@ -83,10 +110,5 @@ public class ProfileRepository extends DataRepository<ProfileEndpoint> implement
     @Override
     protected Class<ProfileEndpoint> getServiceClass() {
 	    return ProfileEndpoint.class;
-    }
-
-    @Override
-    protected boolean isAuthRequired() {
-        return true;
     }
 }

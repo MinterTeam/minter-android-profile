@@ -38,9 +38,12 @@ import network.minter.profile.models.RegisterData;
 import network.minter.profile.models.User;
 import network.minter.profile.models.UsernameData;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * minter-android-profile. 2018
+ * User authentication api repository
  *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
@@ -60,15 +63,41 @@ public class ProfileAuthRepository extends DataRepository<ProfileAuthEndpoint> i
 	    return ProfileAuthEndpoint.class;
     }
 
-	public Call<ProfileResult<User>> login(LoginData loginData) {
-        return getService().login(loginData);
+    /**
+     * Authorize user by username and password
+     * @param loginData login data model
+     * @return
+     */
+    public Call<ProfileResult<User>> login(LoginData loginData) {
+        return getInstantService(cfg -> cfg.authRequired(false)).login(loginData);
     }
 
-	public Call<ProfileResult<ProfileRequestResult>> register(RegisterData registerData) {
+    /**
+     * Register user
+     * @param registerData
+     * @return
+     */
+    public Call<ProfileResult<ProfileRequestResult>> register(RegisterData registerData) {
+        login(null).enqueue(new Callback<ProfileResult<User>>() {
+            @Override
+            public void onResponse(Call<ProfileResult<User>> call, Response<ProfileResult<User>> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ProfileResult<User>> call, Throwable t) {
+
+            }
+        });
         return getInstantService(this).register(registerData);
     }
 
-	public Call<ProfileResult<UsernameData>> checkUsernameAvailability(String username) {
+    /**
+     * Check availability for given username
+     * @param username string WITHOUT prefix "@"
+     * @return
+     */
+    public Call<ProfileResult<UsernameData>> checkUsernameAvailability(String username) {
         return getInstantService(this).checkUsernameAvailability(username);
     }
 }
