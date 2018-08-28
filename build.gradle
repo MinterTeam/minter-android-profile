@@ -50,15 +50,6 @@ allprojects {
     }
 }
 
-ext {
-    minterMinSdk = 16
-    minterMaxSdk = 28
-    minterBuildTools = "28.0.2"
-    minterLibSupport = "27.1.1"
-    minterSdkVers = "0.1.0"
-    pomDescription = "Android Profile API SDK"
-}
-
 apply plugin: 'com.android.library'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
@@ -66,6 +57,15 @@ apply plugin: 'com.jfrog.bintray'
 
 group = 'network.minter.android'
 version = '0.1.1'
+
+ext {
+    minterMinSdk = 16
+    minterMaxSdk = 28
+    minterBuildTools = "28.0.2"
+    minterLibSupport = "27.1.1"
+    minterSdkVers = version
+    pomDescription = "Android Profile API SDK"
+}
 
 android {
     compileSdkVersion minterMaxSdk
