@@ -65,7 +65,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 
 group = 'network.minter.android'
-version = '0.1.0'
+version = '0.1.1'
 
 android {
     compileSdkVersion minterMaxSdk
