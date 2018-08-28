@@ -53,6 +53,7 @@ MinterProfileApi.initialize(new CallbackProvider<String>{
 ```
 
 ### Usage
+SDK uses retrofit http client [see](https://square.github.io/retrofit/)
 ```java
 // get auth (or other) repository
 ProfileAuthRepository profileRepo = MinterProfileApi.getInstance().auth();
@@ -61,7 +62,7 @@ ProfileAuthRepository profileRepo = MinterProfileApi.getInstance().auth();
 LoginData loginData = new LoginData();
 // ... fill data
 
-// and send (retrofit https://square.github.io/retrofit/) request
+// and send request
 profileRepo.login(loginData).enqueue(new Callback<ProfileResult<User>>() {
     @Override
     public void onResponse(Call<ProfileResult<User>> call, Response<ProfileResult<User>> response) {
