@@ -1,6 +1,6 @@
 Minter Android Profile API SDK
 ==============================
-[![Download](https://api.bintray.com/packages/minterteam/android/minter-android-profile-testnet/images/download.svg?version=0.1.0) ](https://bintray.com/minterteam/android/minter-android-profile-testnet/0.1.0/link)
+[![Download](https://api.bintray.com/packages/minterteam/android/minter-android-profile-testnet/images/download.svg) ](https://bintray.com/minterteam/android/minter-android-profile-testnet/_latestVersion)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
