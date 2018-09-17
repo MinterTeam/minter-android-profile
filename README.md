@@ -24,15 +24,15 @@ project build.gradle
 ```groovy
 
 ext {
-    minterSdkVersion = "0.1.1"
+    minterProfileSDK = "0.1.2"
 }
 
 dependencies {
     // for testnet use suffix "-testnet"
-    implementation "network.minter.android:minter-android-explorer-testnet:${minterSdkVersion}"
+    implementation "network.minter.android:minter-android-explorer-testnet:${minterProfileSDK}"
 
     // for main net
-    implementation "network.minter.android:minter-android-explorer:${minterSdkVersion}"
+    implementation "network.minter.android:minter-android-explorer:${minterProfileSDK}"
 }
 ```
 
@@ -82,5 +82,19 @@ For more examples, see our [wallet app](https://github.com/MinterTeam/minter-and
 ## Docs
 TODO (javadocs available)
 
-# Build
+## Build
 TODO
+
+## Tests
+TODO
+
+## Changelog
+
+See [Release notes](RELEASE.md)
+
+
+## License
+
+This software is released under the [MIT](LICENSE.txt) License.
+
+© 2018 MinterTeam <edward.vstock@gmail.com>, All rights reserved.
