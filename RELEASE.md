@@ -1,5 +1,8 @@
 # Release notes
 
+## 0.1.4
+ - added method to get random user avatar by it's minter address
+
 ## 0.1.3
  - package dependencies fix
 

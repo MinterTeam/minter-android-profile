@@ -1,7 +1,7 @@
 Minter Android Profile API SDK
 ==============================
 [![Download](https://api.bintray.com/packages/minterteam/android/minter-android-profile-testnet/images/download.svg) ](https://bintray.com/minterteam/android/minter-android-profile-testnet/_latestVersion)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.txt)
 
 
 Minter user profile (my.minter.network console) sdk library
@@ -24,7 +24,7 @@ project build.gradle
 ```groovy
 
 ext {
-    minterProfileSDK = "0.1.3"
+    minterProfileSDK = "0.1.34"
 }
 
 dependencies {

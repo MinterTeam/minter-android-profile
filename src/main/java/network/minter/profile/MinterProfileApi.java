@@ -33,6 +33,7 @@ import com.google.gson.GsonBuilder;
 
 import java.math.BigInteger;
 
+import network.minter.core.MinterSDK;
 import network.minter.core.crypto.BytesData;
 import network.minter.core.crypto.EncryptedString;
 import network.minter.core.crypto.MinterAddress;
@@ -135,6 +136,29 @@ public class MinterProfileApi {
     public static String getUserAvatarUrl(String id) {
         checkNotNull(id, "Id required");
         return BASE_API_URL + "/api/v1/avatar/by/user/" + id;
+    }
+
+    /**
+     * Return constant user avatar url using minter address Mx...
+     * @param address minter address object
+     * @return user avatar url (if user does not exists, returns some default avatar)
+     */
+    public static String getUserAvatarUrlByAddress(MinterAddress address) {
+        return getUserAvatarUrlByAddress(address.toString());
+    }
+
+    /**
+     * Return constant user avatar url using minter address Mx...
+     * @param address minter address with prefix Mx
+     * @return user avatar url (if user does not exists, returns some default avatar)
+     */
+    public static String getUserAvatarUrlByAddress(String address) {
+        if (!address.startsWith(MinterSDK.PREFIX_ADDRESS)) {
+            return getUserAvatarUrl(1);
+        }
+
+        checkNotNull(address, "address required");
+        return BASE_API_URL + "/api/v1/avatar/by/address/" + address;
     }
 
     /**
