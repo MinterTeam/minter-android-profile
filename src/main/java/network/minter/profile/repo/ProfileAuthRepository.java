@@ -26,7 +26,7 @@
 
 package network.minter.profile.repo;
 
-import android.support.annotation.NonNull;
+import javax.annotation.Nonnull;
 
 import network.minter.core.internal.api.ApiService;
 import network.minter.core.internal.data.DataRepository;
@@ -48,7 +48,7 @@ import retrofit2.Response;
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
 public class ProfileAuthRepository extends DataRepository<ProfileAuthEndpoint> implements DataRepository.Configurator {
-	public ProfileAuthRepository(@NonNull ApiService.Builder apiBuilder) {
+    public ProfileAuthRepository(@Nonnull ApiService.Builder apiBuilder) {
         super(apiBuilder);
     }
 
@@ -57,7 +57,7 @@ public class ProfileAuthRepository extends DataRepository<ProfileAuthEndpoint> i
         api.authRequired(true);
     }
 
-    @NonNull
+    @Nonnull
     @Override
     protected Class<ProfileAuthEndpoint> getServiceClass() {
 	    return ProfileAuthEndpoint.class;

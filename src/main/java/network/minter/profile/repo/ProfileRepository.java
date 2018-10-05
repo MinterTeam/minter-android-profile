@@ -26,9 +26,9 @@
 
 package network.minter.profile.repo;
 
-import android.support.annotation.NonNull;
-
 import java.util.Map;
+
+import javax.annotation.Nonnull;
 
 import network.minter.core.internal.api.ApiService;
 import network.minter.core.internal.data.DataRepository;
@@ -45,11 +45,10 @@ import static network.minter.core.internal.common.Preconditions.checkNotNull;
 /**
  * minter-android-profile. 2018
  * Private user data api repository
- *
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
 public class ProfileRepository extends DataRepository<ProfileEndpoint> implements DataRepository.Configurator {
-	public ProfileRepository(@NonNull ApiService.Builder apiBuilder) {
+    public ProfileRepository(@Nonnull ApiService.Builder apiBuilder) {
         super(apiBuilder);
     }
 
@@ -66,7 +65,7 @@ public class ProfileRepository extends DataRepository<ProfileEndpoint> implement
      * @param data
      * @return
      */
-    public Call<ProfileResult<ProfileRequestResult>> updateProfile(@NonNull User.Data data) {
+    public Call<ProfileResult<ProfileRequestResult>> updateProfile(@Nonnull User.Data data) {
         checkNotNull(data);
         return getInstantService(this).updateProfile(data);
     }
@@ -106,9 +105,9 @@ public class ProfileRepository extends DataRepository<ProfileEndpoint> implement
         api.authRequired();
     }
 
-    @NonNull
+    @Nonnull
     @Override
     protected Class<ProfileEndpoint> getServiceClass() {
-	    return ProfileEndpoint.class;
+        return ProfileEndpoint.class;
     }
 }

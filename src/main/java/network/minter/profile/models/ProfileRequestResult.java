@@ -26,8 +26,6 @@
 
 package network.minter.profile.models;
 
-import android.net.Uri;
-
 import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
@@ -50,7 +48,7 @@ public class ProfileRequestResult {
 
     @Parcel
     public static class Confirmation {
-        public Uri endpoint;
+        public String endpoint;
         public ConfirmType type;
     }
 }

@@ -26,10 +26,10 @@
 
 package network.minter.profile.repo;
 
-import android.support.annotation.NonNull;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.Nonnull;
 
 import network.minter.core.MinterSDK;
 import network.minter.core.crypto.MinterAddress;
@@ -51,7 +51,7 @@ import static network.minter.core.internal.common.Preconditions.checkNotNull;
  * @author Eduard Maximovich <edward.vstock@gmail.com>
  */
 public class ProfileInfoRepository extends DataRepository<ProfileInfoEndpoint> {
-	public ProfileInfoRepository(@NonNull ApiService.Builder apiBuilder) {
+    public ProfileInfoRepository(@Nonnull ApiService.Builder apiBuilder) {
         super(apiBuilder);
     }
 
@@ -129,7 +129,7 @@ public class ProfileInfoRepository extends DataRepository<ProfileInfoEndpoint> {
      * @param input Can be address with prefix 'Mx', username with prefix '@' or email address
      * @return
      */
-    public Call<ProfileResult<AddressInfoResult>> findAddressInfoByInput(@NonNull String input) {
+    public Call<ProfileResult<AddressInfoResult>> findAddressInfoByInput(@Nonnull String input) {
         checkNotNull(input, "Input can't be null");
         checkArgument(!input.isEmpty(), "Input can't be empty string");
         checkArgument(input.length() >= 2, "Input length must have length more than 2 characters");
@@ -146,7 +146,7 @@ public class ProfileInfoRepository extends DataRepository<ProfileInfoEndpoint> {
         }
     }
 
-    @NonNull
+    @Nonnull
     @Override
     protected Class<ProfileInfoEndpoint> getServiceClass() {
 	    return ProfileInfoEndpoint.class;

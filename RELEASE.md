@@ -1,5 +1,11 @@
 # Release notes
 
+## 0.2.0
+ - BREAKING CHANGES:
+   - changed `android.net.Uri` to `String` type for `ProfileRequestResult$Confirmation#endpoint`
+ - Reduced android dependencies usage
+
+
 ## 0.1.4
  - added method to get random user avatar by it's minter address
 

@@ -26,12 +26,11 @@
 
 package network.minter.profile;
 
-import android.net.Uri;
-import android.support.annotation.NonNull;
-
 import com.google.gson.GsonBuilder;
 
 import java.math.BigInteger;
+
+import javax.annotation.Nonnull;
 
 import network.minter.core.MinterSDK;
 import network.minter.core.crypto.BytesData;
@@ -44,7 +43,6 @@ import network.minter.core.internal.api.converters.EncryptedStringDeserializer;
 import network.minter.core.internal.api.converters.EncryptedStringSerializer;
 import network.minter.core.internal.api.converters.MinterAddressDeserializer;
 import network.minter.core.internal.api.converters.MinterAddressSerializer;
-import network.minter.core.internal.api.converters.UriDeserializer;
 import network.minter.core.internal.common.CallbackProvider;
 import network.minter.profile.repo.ProfileAddressRepository;
 import network.minter.profile.repo.ProfileAuthRepository;
@@ -112,7 +110,7 @@ public class MinterProfileApi {
      * @param coinName string coin name (min len: 3, max: 10)
      * @return coin avatar url (if coin does not exists, returns some default avatar)
      */
-    public static String getCoinAvatarUrl(final @NonNull String coinName) {
+    public static String getCoinAvatarUrl(final @Nonnull String coinName) {
         checkNotNull(coinName, "Coin name can't be null");
         checkArgument(coinName.length() >= 3 && coinName.length() <= 10, "Coin length must be from 3 to 10 chars");
         return BASE_API_URL + "/api/v1/avatar/by/coin/" + coinName.toUpperCase();
@@ -189,8 +187,6 @@ public class MinterProfileApi {
         out.registerTypeAdapter(BytesData.class, new BytesDataDeserializer());
         out.registerTypeAdapter(EncryptedString.class, new EncryptedStringDeserializer());
         out.registerTypeAdapter(EncryptedString.class, new EncryptedStringSerializer());
-        out.registerTypeAdapter(Uri.class, new UriDeserializer());
-
 
         return out;
     }
