@@ -4,6 +4,7 @@
  - BREAKING CHANGES:
    - changed `android.net.Uri` to `String` type for `ProfileRequestResult$Confirmation#endpoint`
  - Reduced android dependencies usage
+ - Custom logger
 
 
 ## 0.1.4

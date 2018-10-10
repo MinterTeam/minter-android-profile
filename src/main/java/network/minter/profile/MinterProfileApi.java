@@ -43,7 +43,9 @@ import network.minter.core.internal.api.converters.EncryptedStringDeserializer;
 import network.minter.core.internal.api.converters.EncryptedStringSerializer;
 import network.minter.core.internal.api.converters.MinterAddressDeserializer;
 import network.minter.core.internal.api.converters.MinterAddressSerializer;
-import network.minter.core.internal.common.CallbackProvider;
+import network.minter.core.internal.common.Lazy;
+import network.minter.core.internal.log.Mint;
+import network.minter.core.internal.log.TimberLogger;
 import network.minter.profile.repo.ProfileAddressRepository;
 import network.minter.profile.repo.ProfileAuthRepository;
 import network.minter.profile.repo.ProfileInfoRepository;
@@ -66,7 +68,7 @@ public class MinterProfileApi {
     private ProfileAddressRepository mAddressRepository;
     private ProfileRepository mProfileRepository;
 
-    private MinterProfileApi(final CallbackProvider<String> token) {
+    private MinterProfileApi(final Lazy<String> token) {
         mApiService = new ApiService.Builder(BASE_API_URL, getGsonBuilder());
         mApiService.addHeader("Content-Type", "application/json");
         mApiService.addHeader("X-Minter-Client-Name", "MinterAndroid (profile)");
@@ -86,8 +88,8 @@ public class MinterProfileApi {
      * Init sdk with no debug log
      * @param token callback for getting token from your storage
      */
-    public static void initialize(CallbackProvider<String> token) {
-        initialize(token, false);
+    public static void initialize(Lazy<String> token) {
+        initialize(token, false, new TimberLogger());
     }
 
     /**
@@ -95,11 +97,23 @@ public class MinterProfileApi {
      * @param token callback for getting token from your storage
      * @param debug enable debug logs
      */
-    public static void initialize(CallbackProvider<String> token, boolean debug) {
+    public static void initialize(Lazy<String> token, boolean debug) {
+        initialize(token, debug, new TimberLogger());
+    }
+
+    /**
+     * Init sdk with debug log
+     * @param token callback for getting token from your storage
+     * @param debug enable debug logs
+     */
+    public static void initialize(Lazy<String> token, boolean debug, Mint.Leaf logger) {
         if (INSTANCE != null) {
             return;
         }
 
+        if (debug) {
+            Mint.brew(logger);
+        }
         INSTANCE = new MinterProfileApi(token);
         INSTANCE.mApiService.setDebug(debug);
         INSTANCE.mApiService.setDebugRequestLevel(debug ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
