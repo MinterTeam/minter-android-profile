@@ -4,7 +4,7 @@ Minter Android Profile API SDK
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.txt)
 
 
-Minter user profile (my.minter.network console) sdk library
+Minter user profile (https://testnet.console.minter.network) sdk library
 -----------------------------------------------------------
 
 ## Setup
@@ -24,15 +24,15 @@ project build.gradle
 ```groovy
 
 ext {
-    minterProfileSDK = "0.2.0"
+    minterProfileSDK = "0.2.1"
 }
 
 dependencies {
     // for testnet use suffix "-testnet"
-    implementation "network.minter.android:minter-android-explorer-testnet:${minterProfileSDK}"
+    implementation "network.minter.android:minter-android-profile-testnet:${minterProfileSDK}"
 
     // for main net
-    implementation "network.minter.android:minter-android-explorer:${minterProfileSDK}"
+    implementation "network.minter.android:minter-android-profile:${minterProfileSDK}"
 }
 ```
 
