@@ -135,7 +135,7 @@ android {
         // can't use name starts with 'test'
         netMain {
             dimension "env"
-            buildConfigField "String", "BASE_API_URL", '"https://my.minter.network"'
+            buildConfigField "String", "BASE_API_URL", '"https://my.apps.minter.network"'
         }
         netTest {
             dimension "env"
