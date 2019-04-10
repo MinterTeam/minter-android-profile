@@ -1,5 +1,8 @@
 # Release notes
 
+## 0.2.2
+ - Update mainnet api url
+
 ## 0.2.1
  - Updated core library
 
