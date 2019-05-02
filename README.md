@@ -24,7 +24,7 @@ project build.gradle
 ```groovy
 
 ext {
-    minterProfileSDK = "0.2.2"
+    minterProfileSDK = "0.2.3"
 }
 
 dependencies {
