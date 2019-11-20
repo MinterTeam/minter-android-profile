@@ -37,12 +37,10 @@ import network.minter.core.crypto.BytesData;
 import network.minter.core.crypto.EncryptedString;
 import network.minter.core.crypto.MinterAddress;
 import network.minter.core.internal.api.ApiService;
-import network.minter.core.internal.api.converters.BigIntegerDeserializer;
-import network.minter.core.internal.api.converters.BytesDataDeserializer;
-import network.minter.core.internal.api.converters.EncryptedStringDeserializer;
-import network.minter.core.internal.api.converters.EncryptedStringSerializer;
-import network.minter.core.internal.api.converters.MinterAddressDeserializer;
-import network.minter.core.internal.api.converters.MinterAddressSerializer;
+import network.minter.core.internal.api.converters.BigIntegerJsonConverter;
+import network.minter.core.internal.api.converters.BytesDataJsonConverter;
+import network.minter.core.internal.api.converters.EncryptedStringJsonConverter;
+import network.minter.core.internal.api.converters.MinterAddressJsonConverter;
 import network.minter.core.internal.common.Lazy;
 import network.minter.core.internal.log.Mint;
 import network.minter.core.internal.log.TimberLogger;
@@ -195,12 +193,10 @@ public class MinterProfileApi {
      */
     public GsonBuilder getGsonBuilder() {
         GsonBuilder out = new GsonBuilder();
-        out.registerTypeAdapter(MinterAddress.class, new MinterAddressDeserializer());
-        out.registerTypeAdapter(MinterAddress.class, new MinterAddressSerializer());
-        out.registerTypeAdapter(BigInteger.class, new BigIntegerDeserializer());
-        out.registerTypeAdapter(BytesData.class, new BytesDataDeserializer());
-        out.registerTypeAdapter(EncryptedString.class, new EncryptedStringDeserializer());
-        out.registerTypeAdapter(EncryptedString.class, new EncryptedStringSerializer());
+        out.registerTypeAdapter(MinterAddress.class, new MinterAddressJsonConverter());
+        out.registerTypeAdapter(BigInteger.class, new BigIntegerJsonConverter());
+        out.registerTypeAdapter(BytesData.class, new BytesDataJsonConverter());
+        out.registerTypeAdapter(EncryptedString.class, new EncryptedStringJsonConverter());
 
         return out;
     }

@@ -31,7 +31,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.0'
+        classpath 'com.android.tools.build:gradle:3.5.2'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
     }
 }
@@ -54,19 +54,19 @@ apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 
 group = 'network.minter.android'
-version = '0.2.4'
+version = '0.2.5'
 
 ext {
     minterMinSdk = 16
-    minterMaxSdk = 28
-    minterBuildTools = "28.0.3"
-    minterCoreSDK = "0.2.5"
+    minterMaxSdk = 29
+    minterBuildTools = "29.0.2"
+    minterCoreSDK = "0.7.0"
 
     buildArtifactName = project.name
     buildArtifactVersion = version
     buildArtifactGroup = group
 
-    pomName = "Minter Core"
+    pomName = "Minter Profile"
     pomUrl = "https://github.com/MinterTeam/minter-android-profile"
     pomScm = {
         connection = "scm:git:git://github.com/MinterTeam/minter-android-profile.git"
@@ -102,7 +102,7 @@ android {
         targetSdkVersion minterMaxSdk
         versionCode 2
         versionName version
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
 
@@ -153,12 +153,12 @@ dependencies {
     // network
     implementation 'com.squareup.okhttp3:okhttp:3.12.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
 
     // stuff
     implementation 'org.parceler:parceler-api:1.1.12'
     annotationProcessor 'org.parceler:parceler:1.1.12'
 }
 
-apply from: 'scripts/minter_publish.gradle'
+apply from: 'scripts/maven_publish.gradle'
