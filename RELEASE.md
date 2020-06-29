@@ -1,5 +1,9 @@
 # Release notes
 
+## 0.2.6
+ - Updated build scripts
+ - Updated core SDK
+
 ## 0.2.5
  - Updated dependencies
  - Migrated to androidx

@@ -5,7 +5,8 @@ Minter Android Profile API SDK
 
 
 Minter user profile (https://testnet.console.minter.network) sdk library
------------------------------------------------------------
+------------------------------------------------------------------------
+**DEPRECATED SDK**
 
 ## Setup
 
@@ -24,7 +25,7 @@ project build.gradle
 ```groovy
 
 ext {
-    minterProfileSDK = "0.2.5"
+    minterProfileSDK = "0.2.6"
 }
 
 dependencies {
